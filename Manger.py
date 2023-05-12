@@ -5,7 +5,7 @@ import os
 from time import sleep
 class PasswordManagerGUI:
 
-    def __init__(self, master):
+    def __init__(self, master: tk.TK):
         self.master = master
         master.title("Password Manager")
 
@@ -25,7 +25,7 @@ class PasswordManagerGUI:
         self.result_label.place(relx=0.5, rely=0.8, anchor='center')
 
 #Sets up a text field to that will later be used in another function
-    def see_entries(self):
+    def see_entries(self) -> None:
         # Add a label underneath the buttons
         self.entry_label = tk.Label(self.master, text="App", font=("Roboto", 12))
         self.entry_label.place(relx=0.5, rely=0.6, anchor='center', x=-60)
@@ -45,7 +45,7 @@ class PasswordManagerGUI:
         self.clear_button = ttk.Button(self.master, text="Back", command=self.clear_search_entry)
         self.clear_button.place(relx=0.7, rely=0.7, anchor='center')
 
-    def search_entries(self):
+    def search_entries(self) -> None:
         search = self.entry_entry.get().lower()
 
         # Read the CSV file
@@ -87,7 +87,7 @@ class PasswordManagerGUI:
 
             
 #Sets up text fields for the user to input a new Username, Password, and App
-    def new_entry(self):
+    def new_entry(self) -> None:
 
         # Clears the tab buttons
         self.see_entries_button.place_forget()
@@ -118,7 +118,7 @@ class PasswordManagerGUI:
 
 
 
-    def store_entry(self):
+    def store_entry(self) -> None:
         # Retrieves the entered username password and app
         username = self.username_entry.get()
         password = self.password_entry.get()
@@ -182,7 +182,7 @@ class PasswordManagerGUI:
             self.no_button.place(relx=0.5, rely=0.7, anchor='center', x=60)
 
     # deletes the app for the new entry
-    def overwrite(self, username, password, app, csv_file):
+    def overwrite(self, username: str, password: str, app: str, csv_file: str) -> None:
     # finding the app to overwrite  
         with open(csv_file, 'r') as file:
             reading = csv.DictReader(file)
@@ -202,7 +202,7 @@ class PasswordManagerGUI:
         self.clear_new_entry()  
 
 #Clears the new entry tab
-    def clear_new_entry(self):
+    def clear_new_entry(self)-> None:
         self.yes_button.place_forget()
         self.no_button.place_forget()
         self.result_label.place_forget()
@@ -212,7 +212,7 @@ class PasswordManagerGUI:
         self.new_entry_button.place(relx=0.5, rely=0.5, anchor='center', x=60)
 
 #Clears the search entry tab
-    def clear_search_entry(self):
+    def clear_search_entry(self)-> None:
         self.entry_entry.place_forget()
         self.search_button.place_forget()
         self.entry_label.place_forget()
