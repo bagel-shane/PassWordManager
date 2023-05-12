@@ -5,29 +5,29 @@ import os
 from time import sleep
 class PasswordManagerGUI:
 
-    def __init__(self, master: tk.TK):
-        self.master = master
-        master.title("Password Manager")
+    def __init__(self, screen) -> None:
+        self.screen = screen
+        screen.title("Password Manager")
 
         # Text to welcome the user to the GUI
-        welcome_text = tk.Label(master, text="Welcome to Your Password Manager", font=("Roboto", 16))
+        welcome_text = tk.Label(screen, text="Welcome to Your Password Manager", font=("Roboto", 16))
         welcome_text.place(relx=0.5, rely=0.2, anchor='center')
 
         # Create buttons for the different tabs
-        self.see_entries_button = ttk.Button(master, text="See Entries", command=self.see_entries)
+        self.see_entries_button = ttk.Button(screen, text="See Entries", command=self.see_entries)
         self.see_entries_button.place(relx=0.5, rely=0.5, anchor='center', x=-60)
 
-        self.new_entry_button = ttk.Button(master, text="New Entry", command=self.new_entry)
+        self.new_entry_button = ttk.Button(screen, text="New Entry", command=self.new_entry)
         self.new_entry_button.place(relx=0.5, rely=0.5, anchor='center', x=60)
 
         # fix for the forget placeholder error
-        self.result_label = tk.Label(self.master, text='', font=("Roboto", 12), fg='green')
+        self.result_label = tk.Label(self.screen, text='', font=("Roboto", 12), fg='green')
         self.result_label.place(relx=0.5, rely=0.8, anchor='center')
 
 #Sets up a text field to that will later be used in another function
     def see_entries(self) -> None:
         # Add a label underneath the buttons
-        self.entry_label = tk.Label(self.master, text="App", font=("Roboto", 12))
+        self.entry_label = tk.Label(self.screen, text="App", font=("Roboto", 12))
         self.entry_label.place(relx=0.5, rely=0.6, anchor='center', x=-60)
 
         # Forget the tab buttons
@@ -35,14 +35,14 @@ class PasswordManagerGUI:
         self.new_entry_button.place_forget()
 
         # Create the App text field
-        self.entry_entry = tk.Entry(self.master, font=("Roboto", 12))
+        self.entry_entry = tk.Entry(self.screen, font=("Roboto", 12))
         self.entry_entry.place(relx=0.5, rely=0.6, anchor='center', x=60)
 
         # Create the search button
-        self.search_button = ttk.Button(self.master, text="Search", command=self.search_entries)
+        self.search_button = ttk.Button(self.screen, text="Search", command=self.search_entries)
         self.search_button.place(relx=0.3, rely=0.7, anchor='center')
 
-        self.clear_button = ttk.Button(self.master, text="Back", command=self.clear_search_entry)
+        self.clear_button = ttk.Button(self.screen, text="Back", command=self.clear_search_entry)
         self.clear_button.place(relx=0.7, rely=0.7, anchor='center')
 
     def search_entries(self) -> None:
@@ -72,17 +72,17 @@ class PasswordManagerGUI:
             # Display the result
             self.result_label.place_forget()
 
-            self.result_label = tk.Label(self.master, text=result_text, font=("Roboto", 12), fg='green')
+            self.result_label = tk.Label(self.screen, text=result_text, font=("Roboto", 12), fg='green')
             self.result_label.place(relx=0.5, rely=0.8, anchor='center')
 
         except FileNotFoundError as e:
-            self.result_label = tk.Label(self.master, text="No file found", font=("Roboto", 12), fg='red')
+            self.result_label = tk.Label(self.screen, text="No file found", font=("Roboto", 12), fg='red')
             self.result_label.place(relx=0.5, rely=0.8, anchor='center')
         except ValueError as e:
-            self.result_label = tk.Label(self.master, text="No file found", font=("Roboto", 12), fg='red')
+            self.result_label = tk.Label(self.screen, text="No file found", font=("Roboto", 12), fg='red')
             self.result_label.place(relx=0.5, rely=0.8, anchor='center')
         except Exception as e:
-            self.result_label = tk.Label(self.master, text="An error occurred", font=("Roboto", 12), fg='red')
+            self.result_label = tk.Label(self.screen, text="An error occurred", font=("Roboto", 12), fg='red')
             self.result_label.place(relx=0.5, rely=0.8, anchor='center')
 
             
@@ -94,26 +94,26 @@ class PasswordManagerGUI:
         self.new_entry_button.place_forget()
 
         # Create labels and text boxes
-        self.username_label = tk.Label(self.master, text="Username", font=("Roboto", 12))
+        self.username_label = tk.Label(self.screen, text="Username", font=("Roboto", 12))
         self.username_label.place(relx=0.3, rely=0.6, anchor='w', x=-30)
         
-        self.password_label = tk.Label(self.master, text="Password", font=("Roboto", 12))
+        self.password_label = tk.Label(self.screen, text="Password", font=("Roboto", 12))
         self.password_label.place(relx=0.3, rely=0.7, anchor='w', x=-30)
 
-        self.apps_label = tk.Label(self.master, text="Apps", font=("Roboto", 12))
+        self.apps_label = tk.Label(self.screen, text="Apps", font=("Roboto", 12))
         self.apps_label.place(relx=0.3, rely=0.8, anchor='w', x=-30)
         
-        self.username_entry = tk.Entry(self.master, font=("Roboto", 12))
+        self.username_entry = tk.Entry(self.screen, font=("Roboto", 12))
         self.username_entry.place(relx=0.3, rely=0.6, anchor='w', x=80)
 
-        self.password_entry = tk.Entry(self.master, font=("Roboto", 12), show="*")
+        self.password_entry = tk.Entry(self.screen, font=("Roboto", 12), show="*")
         self.password_entry.place(relx=0.3, rely=0.7, anchor='w', x=80)
 
-        self.apps_entry = tk.Entry(self.master, font=("Roboto", 12))
+        self.apps_entry = tk.Entry(self.screen, font=("Roboto", 12))
         self.apps_entry.place(relx=0.3, rely=0.8, anchor='w', x=80)
 
         # Create "Add" button
-        self.add_button = ttk.Button(self.master, text="Add", command=self.store_entry)
+        self.add_button = ttk.Button(self.screen, text="Add", command=self.store_entry)
         self.add_button.place(relx=0.5, rely=0.9, anchor='center')
 
 
@@ -163,7 +163,7 @@ class PasswordManagerGUI:
                 writing.writerow([username, password, apps])
 
             #Displays the Success message
-            self.result_label = tk.Label(self.master, text="Username and Password Saved", font=("Roboto", 12), fg='green')
+            self.result_label = tk.Label(self.screen, text="Username and Password Saved", font=("Roboto", 12), fg='green')
             self.result_label.place(relx=0.5, rely=0.4, anchor='center')
             
             #places the tab entry buttons
@@ -171,14 +171,14 @@ class PasswordManagerGUI:
             self.new_entry_button.place(relx=0.5, rely=0.5, anchor='center', x=60)
         else:
             # Displays the Overwrite message
-            self.result_label = tk.Label(self.master, text="Would you like to Overwrite the Existing Entry", font=("Roboto", 12), fg='red')
+            self.result_label = tk.Label(self.screen, text="Would you like to Overwrite the Existing Entry", font=("Roboto", 12), fg='red')
             self.result_label.place(relx=0.5, rely=0.4, anchor='center')
 
             # Creating a yes or no button to overwrite the existing entry
-            self.yes_button = ttk.Button(self.master, text="Yes", command=lambda: self.overwrite(username, password, apps, csv_file))
+            self.yes_button = ttk.Button(self.screen, text="Yes", command=lambda: self.overwrite(username, password, apps, csv_file))
             self.yes_button.place(relx=0.5, rely=0.7, anchor='center', x=-60)
 
-            self.no_button = ttk.Button(self.master, text="No", command= self.clear_new_entry)
+            self.no_button = ttk.Button(self.screen, text="No", command= self.clear_new_entry)
             self.no_button.place(relx=0.5, rely=0.7, anchor='center', x=60)
 
     # deletes the app for the new entry
